@@ -1,61 +1,51 @@
-import { useState } from "react"
 
-export default function UserInput() {
+export default function UserInput({ whileChange, userInput, initialInvestmentSet }) {
+    // console.log(whileChange("initialInvestment", userInput.initialInvestment));
 
-    const [userInput, setUserInput] = useState({
-        initialInvestment: 10000,
-        annualInvestment: 1200,
-        expectedReturn: 6,
-        duration: 10
-    })
-
-    function handelChange(inputIdentifier, newValue) {
-
-        setUserInput(prevArrayFromInput => {
-            return {
-                ...prevArrayFromInput,
-                [inputIdentifier]: newValue
-            }
-        })
-
-
-    }
 
     return <>
         <section id="user-input" >
             <div className="input-group">
                 <p>
                     <label htmlFor="input">INITIAL INVESTMENT</label>
-                    <input onChange={(e) => handelChange("initialInvestment", e.target.value)}
+
+                    <input
                         required
                         type="number"
                         value={userInput.initialInvestment}
+                        onChange={(e) => {
+                            whileChange("initialInvestment", e.target.value);
+                            initialInvestmentSet(e.target.value);
+                        }}
                     />
                 </p>
                 <p>
                     <label htmlFor="input">ANNUAL INVESTMENT</label>
-                    <input onChange={() => handelChange("annualInvestment", e.target.value)}
+                    <input
                         required
                         type="number"
                         value={userInput.annualInvestment}
+                        onChange={(e) => whileChange("annualInvestment", e.target.value)}
                     />
                 </p>
             </div>
             <div className="input-group">
                 <p>
                     <label htmlFor="input">EXPECTED RETURN</label>
-                    <input onChange={() => handelChange("expectedReturn", e.target.value)}
+                    <input
                         required
                         type="number"
                         value={userInput.expectedReturn}
+                        onChange={(e) => whileChange("expectedReturn", e.target.value)}
                     />
                 </p>
                 <p>
                     <label htmlFor="input">DURATION</label>
-                    <input onChange={() => handelChange("duration", e.target.value)}
+                    <input
                         required
                         type="number"
                         value={userInput.duration}
+                        onChange={(e) => whileChange("duration", e.target.value)}
                     />
 
                 </p>
